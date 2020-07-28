@@ -2,7 +2,7 @@ import random
 
 
 def generate_pass():
-	capital_letters = ['A','G','Y','E','P','O','Q','W','E','Z']
+	capital_letters = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 	lowercase_letters = ['a','q','w','e','r','t','y','b','c','z','p']
 	numbers = ['1','2','3','4','5','6','7','8','9','0']
 	symbols = ['!',"?",'%','#']
