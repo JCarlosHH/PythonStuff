@@ -1,13 +1,26 @@
 import sys
 
 
-clients = ['Bill','Bev','Ben','Mike','Stan','Richie','Eddie']
+clients = [
+	{
+		'name':'Bev',
+		'company': 'Google',
+		'email': 'bev@google.com',
+		'position': 'Software Engineer'
+	},
+	{
+		'name':'Bill',
+		'company': 'Google',
+		'email': 'bill@google.com',
+		'position': 'Data Engineer'
+	}
+]
 
 
-def create_client(client_name):
+def create_client(client):
 	global clients
-	if client_name not in clients:
-		clients.append(client_name)
+	if client not in clients:
+		clients.append(client)
 	else:
 		print('Client already is in the client\'s list')
 	
@@ -37,7 +50,7 @@ def _add_comma():
 def list_clients():
 	global clients
 	for i,client in enumerate(clients):
-		print('{}: {}'.format(i,client))
+		print('{}: {}'.format(i,client['name']))
 
 
 def update_client(client_name, updated_client_name):
@@ -60,6 +73,13 @@ def _print_welcome():
 	print('*'*50)
 	
 
+def _get_cliet_field(field_name):
+	field = None
+	while not field:
+		field = input('What is the client {}?'.format(field_name))
+	return field
+
+
 def _get_cliet_name():
 	client_name = None
 	while not client_name:
@@ -79,8 +99,13 @@ if __name__ == '__main__':
 	command = command.upper()
 
 	if command == 'C':
-		client_name = _get_cliet_name()
-		create_client(client_name)
+		client = {
+			'name': _get_cliet_field('name'),
+			'company': _get_cliet_field('company'),
+			'email': _get_cliet_field('email'),
+			'position': _get_cliet_field('position')
+		}
+		create_client(client)
 		list_clients()
 	elif command == 'D':
 		list_clients()
