@@ -1,6 +1,6 @@
 
 
-clients = 'pablo,ricardo'
+clients = 'Bill,Bev,Ben,Mike,Stan,Richie,Eddie'
 
 
 def create_client(client_name):
@@ -19,6 +19,18 @@ def delete_client(client_name):
 		clients = clients.replace(client_name,'')
 	else:
 		print('Client is not in clients list')
+
+
+def search_client(client_name):
+	global clients
+	clients = clients.lower()
+	clients_list = clients.split(',')
+	client_name.lower()
+	for client in clients_list:
+		if client != client_name:
+			continue
+		else:
+			return True
 
 
 def _add_comma():
@@ -46,6 +58,7 @@ def _print_welcome():
 	print('[C]reate client')
 	print('[U]pdate client')
 	print('[D]elete client')
+	print('[S]earch client')
 	print('*'*50)
 	
 
@@ -75,6 +88,13 @@ if __name__ == '__main__':
 		updated_client_name = input('What is the updated client name?')
 		update_client(client_name, updated_client_name)
 		list_clients()
+	elif command == 'S':
+		client_name = _get_cliet_name()
+		found = search_client(client_name)
+		if found:
+			print('The client is in the client\'s list')
+		else:
+			print('The client: {} is not in our client\'s list'.format(client_name))
 	else:
 		print('Invalid command')
 
