@@ -25,21 +25,23 @@ def create_client(client):
 		print('Client already is in the client\'s list')
 	
 
-def delete_client(client_name):
+def _get_client_delete(client_name):
 	global clients
-	if client_name in clients:
-		clients.remove(client_name)
+	#client = input('Which client do you want to delete?')
+	id = search_client(client_name)
+	if id != None:
+		del clients[id]
 	else:
-		print('Client is not in clients list')
+		print('The client is not our client\'s list')
 
 
 def search_client(client_name):
 	global clients
-	for client in clients:
-		if client != client_name:
+	for id,client in enumerate(clients):
+		if client['name'] != client_name:
 			continue
 		else:
-			return True
+			return id
 
 
 def _add_comma():
@@ -50,7 +52,7 @@ def _add_comma():
 def list_clients():
 	global clients
 	for i,client in enumerate(clients):
-		print('{}: {}'.format(i,client['name']))
+		print('{uid} | {name} | {company} | {email} | {position}'.format(uid=i,name=client['name'],company=client['company'],email=client['email'],position=client['position'] ))
 
 
 def update_client(client_name, updated_client_name):
@@ -73,7 +75,7 @@ def _print_welcome():
 	print('*'*50)
 	
 
-def _get_cliet_field(field_name):
+def _get_client_field(field_name):
 	field = None
 	while not field:
 		field = input('What is the client {}?'.format(field_name))
@@ -100,17 +102,17 @@ if __name__ == '__main__':
 
 	if command == 'C':
 		client = {
-			'name': _get_cliet_field('name'),
-			'company': _get_cliet_field('company'),
-			'email': _get_cliet_field('email'),
-			'position': _get_cliet_field('position')
+			'name': _get_client_field('name'),
+			'company': _get_client_field('company'),
+			'email': _get_client_field('email'),
+			'position': _get_client_field('position')
 		}
 		create_client(client)
 		list_clients()
 	elif command == 'D':
 		list_clients()
-		client_name = _get_cliet_name()
-		delete_client(client_name)
+		client_name = _get_client_field('name')
+		_get_client_delete(client_name)
 		list_clients()
 	elif command == 'U':
 		list_clients()
