@@ -44,24 +44,30 @@ def search_client(client_name):
 			return id
 
 
-def _add_comma():
-	global clients
-	clients += ','
-
-
 def list_clients():
 	global clients
 	for i,client in enumerate(clients):
 		print('{uid} | {name} | {company} | {email} | {position}'.format(uid=i,name=client['name'],company=client['company'],email=client['email'],position=client['position'] ))
 
 
-def update_client(client_name, updated_client_name):
+def update_client(client_name):
 	global clients
-	if client_name in clients:
-		index = clients.index(client_name)
-		clients[index] = updated_client_name
+	id = search_client(client_name)
+	if id != None:
+		updated_client = _get_new_client()
+		clients[id].update(updated_client)
 	else:
 		print('Client is not in clients list')
+
+
+def _get_new_client():
+	client = {
+		'name': _get_client_field('name'),
+		'company': _get_client_field('company'),
+		'email':  _get_client_field('email'),
+		'position': _get_client_field('position')
+	} 
+	return client
 
 
 def _print_welcome():
@@ -116,9 +122,8 @@ if __name__ == '__main__':
 		list_clients()
 	elif command == 'U':
 		list_clients()
-		client_name = _get_cliet_name()
-		updated_client_name = input('What is the updated client name?')
-		update_client(client_name, updated_client_name)
+		updated_client_name = _get_cliet_name()
+		update_client(updated_client_name)
 		list_clients()
 	elif command == 'S':
 		client_name = _get_cliet_name()
