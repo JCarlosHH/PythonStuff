@@ -1,3 +1,5 @@
+import math
+
 def run():
     my_list = [1,"Hello", True, 4.5]
     my_dict = {"firstname":"Carlos", "lastname":"Hernandez"}
@@ -49,5 +51,14 @@ def challenge_1_1():
     print(list_comp_challenge)
 
 
+def dict_challenge():
+    my_dict = {key:math.sqrt(key) for key in range(1,10,1) }
+    #for key in range(1,101,1):
+    #    if key%3  != 0:
+    #        my_dict[key]=key**3
+    print(my_dict)
+
+
+
 if __name__ == '__main__':
-    challenge_1_1()
+    dict_challenge()
